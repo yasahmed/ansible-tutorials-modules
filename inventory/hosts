@@ -1,0 +1,6 @@
+[loadbalancer]
+lb ansible_host=167.71.130.26
+
+[webserver]
+app1 ansible_host=134.209.181.219
+app2 ansible_host=134.209.28.210

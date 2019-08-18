@@ -1,0 +1,5 @@
+---
+  - name: run first ansible task on all hosts
+    hosts: "*"
+    tasks:
+      - debug: var=ansible_host

@@ -1,0 +1,34 @@
+---
+  - name: file module examples
+    hosts: "*"
+    tasks:
+      - name: check if file exist (create it if not)
+        file:
+          path: $HOME/test_directory2
+          state: touch
+
+      - name: create multiple files 
+        file:
+          path: "$HOME/{{item}}"
+          state: directory
+        loop: 
+          - test_dir1
+          - test_dir2
+          - test_dir3
+
+      - name: remove test_directory2 directory
+        file:
+          path: $HOME/test_directory2
+          state: absent 
+      
+      - name: change test_f1 permission
+        file:
+          path: $HOME/test_dir1
+          state: directory
+          mode: 750
+
+      - name: create symlink to /etc/passwd
+        file:
+          src: /etc/passwd
+          dest: $HOME/passwd
+          state: link 
