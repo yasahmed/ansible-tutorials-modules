@@ -1,0 +1,23 @@
+---
+  - name: run first ansible task on all hosts
+    hosts: lb
+    tasks:
+      - name: install package via apt module
+        apt:
+          name: 
+            - php7.2
+            - php7.2-mysql
+          state: present
+          update_cache: true
+        become: true
+        when: ansible_os_family=='Debian'
+
+      - name: remove package via apt module
+        apt:
+          name: 
+            - php7.2
+            - php7.2-mysql
+          state: absent
+          autoremove: true
+        become: true
+

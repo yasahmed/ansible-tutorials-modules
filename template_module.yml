@@ -1,0 +1,18 @@
+---
+  - name: run first ansible task on all hosts
+    hosts: lb
+    vars:
+      env: staging  
+      my_app_version: v1.0
+    tasks:
+      - name: generate config app
+        template:
+            src: "{{item}}.conf.j2"
+            dest: /etc/{{item}}.conf
+            owner: root
+            group: root
+            mode: 0600
+        become: true
+        loop:
+          - my_app-preprod
+          - my_app-prod

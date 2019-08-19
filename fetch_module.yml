@@ -1,0 +1,19 @@
+---
+  - name: run first ansible task on all hosts
+    hosts: loadbalancer
+    tasks:
+      - name: create a new file
+        file:
+          path:  "/{{ansible_user}}/test_file.txt"
+          state: touch
+
+      - name: create new file using copy module
+        copy:
+          dest:  "/{{ansible_user}}/test_file_other.txt"
+          content: "{{ansible_host}}"
+
+      - name: fetch test_file.txt file
+        fetch:
+          src: "/{{ansible_user}}/test_file_other.txt"
+          dest: "dir/{{inventory_hostname}}/" #folder : dir/
+          flat: true
