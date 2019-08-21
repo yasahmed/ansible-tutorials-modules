@@ -1,0 +1,14 @@
+---
+- name: how to use file lookup
+  hosts: lb
+  vars:
+    file_content: "{{ lookup('file', 'file.txt') }}"
+    password: "{{ lookup('password', 'password_file') }}" #'/dev/null'
+  tasks:
+    - name: show test file content
+      debug:
+        msg: "Le contenu du fichier est : {{ file_content }}"
+
+    - name: show password file content
+      debug:
+        msg: "Le mot de passe est : {{ password }}"
